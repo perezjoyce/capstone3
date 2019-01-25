@@ -15,7 +15,16 @@ class CreateEnroutesTable extends Migration
     {
         Schema::create('enroutes', function (Blueprint $table) {
             $table->increments('id');
+            $table->longText('objective');
+            $table->unsignedInteger('terminal_id');
             $table->timestamps();
+
+            //FOREIGN KEYS
+            $table->foreign('terminal_id')
+            ->references('id')
+            ->on('terminals')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
         });
     }
 

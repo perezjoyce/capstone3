@@ -15,7 +15,25 @@ class CreateStudentAssessmentsTable extends Migration
     {
         Schema::create('student_assessments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('score');
+            $table->longText('recommendations');
+            $table->unsignedInteger('student_id');
+            $table->unsignedInteger('assessment_id');
+            $table->date('assessment_date');
             $table->timestamps();
+
+            //FOREIGN KEYS
+            $table->foreign('student_id')
+            ->references('id')
+            ->on('students')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
+            $table->foreign('assessment_id')
+            ->references('id')
+            ->on('assessments')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
         });
     }
 

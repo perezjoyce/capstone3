@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentPlacementsTable extends Migration
+class CreateRecommendationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,33 +13,26 @@ class CreateStudentPlacementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_placements', function (Blueprint $table) {
+        Schema::create('recommendations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('semester');
-            $table->string('school_year');
             $table->unsignedInteger('student_id');
-            $table->unsignedInteger('placement_id');
-            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('student_services_id');
+            $table->unsignedInteger('student_placements_id');
+            $table->date('date_presented');
             $table->timestamps();
 
             //FOREIGN KEYS
-            $table->foreign('student_id')
+            $table->foreign('student_services_id')
             ->references('id')
-            ->on('students')
+            ->on('student_services')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
-            $table->foreign('placement_id')
+            $table->foreign('student_placements_id')
             ->references('id')
-            ->on('placements')
+            ->on('student_placements')
             ->onDelete('restrict')
             ->onUpdate('cascade');
-
-             $table->foreign('status_id')
-             ->references('id')
-             ->on('statuses')
-             ->onDelete('restrict')
-             ->onUpdate('cascade');
         });
     }
 
@@ -50,6 +43,6 @@ class CreateStudentPlacementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_placements');
+        Schema::dropIfExists('recommendations');
     }
 }
