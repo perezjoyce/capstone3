@@ -15,14 +15,14 @@ class CreateTerminalsTable extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('objective');
-            $table->unsignedInteger('placement_areas_id');
+            $table->text('objective');
+            $table->unsignedInteger('areas_id');
             $table->timestamps();
 
             //FOREIGN KEY
-            $table->foreign('placement_areas_id')
+            $table->foreign('areas_id')
             ->references('id')
-            ->on('placement_areas')
+            ->on('areas')
             ->onDelete('restrict')
             ->onUpdate('cascade');
         });

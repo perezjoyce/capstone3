@@ -27,3 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 }
+
+// a user belongs to a type
+class User extends Model 
+{
+    public function type(){
+        return $this->belongsTo('\App\Type');
+    }
+}

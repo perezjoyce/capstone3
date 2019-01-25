@@ -19,6 +19,7 @@ class CreateRecommendationsTable extends Migration
             $table->unsignedInteger('student_services_id');
             $table->unsignedInteger('student_placements_id');
             $table->date('date_presented');
+            $table->unsignedInteger('status_id');
             $table->timestamps();
 
             //FOREIGN KEYS
@@ -31,6 +32,12 @@ class CreateRecommendationsTable extends Migration
             $table->foreign('student_placements_id')
             ->references('id')
             ->on('student_placements')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
+
+            $table->foreign('status_id')
+            ->references('id')
+            ->on('statuses')
             ->onDelete('restrict')
             ->onUpdate('cascade');
         });

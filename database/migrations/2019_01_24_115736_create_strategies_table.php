@@ -16,16 +16,9 @@ class CreateStrategiesTable extends Migration
         Schema::create('strategies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->longText('description');
-            $table->unsignedInteger('enroute_id');
+            $table->text('description');
             $table->timestamps();
 
-            //FOREIGN KEYS
-            $table->foreign('enroute_id')
-            ->references('id')
-            ->on('enroutes')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
         });
     }
 

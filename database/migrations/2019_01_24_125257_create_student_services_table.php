@@ -16,15 +16,8 @@ class CreateStudentServicesTable extends Migration
         Schema::create('student_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('status_id');
             $table->timestamps();
 
-            //FOREIGN KEY
-            $table->foreign('status_id')
-            ->references('id')
-            ->on('statuses')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
         });
     }
 

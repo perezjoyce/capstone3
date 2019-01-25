@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentPlacementsTable extends Migration
+class CreateEnrouteStrategiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,27 +13,24 @@ class CreateStudentPlacementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_placements', function (Blueprint $table) {
+        Schema::create('enroute_strategies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('semester');
-            $table->string('school_year');
-            $table->unsignedInteger('student_id');
-            $table->unsignedInteger('placement_id');
+            $table->unsignedInteger('enroute_id');
+            $table->unsignedInteger('strategy_id');
             $table->timestamps();
 
             //FOREIGN KEYS
-            $table->foreign('student_id')
+            $table->foreign('enroute_id')
             ->references('id')
-            ->on('students')
+            ->on('enroute')
             ->onDelete('restrict')
             ->onUpdate('cascade');
 
-            $table->foreign('placement_id')
+            $table->foreign('strategy_id')
             ->references('id')
-            ->on('placements')
+            ->on('strategy')
             ->onDelete('restrict')
             ->onUpdate('cascade');
-
         });
     }
 
@@ -44,6 +41,6 @@ class CreateStudentPlacementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_placements');
+        Schema::dropIfExists('enroute_strategies');
     }
 }
